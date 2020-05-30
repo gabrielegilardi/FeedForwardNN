@@ -24,7 +24,7 @@
 
 `example` Name of the example to run (wine, stock, wifi, pulsar.)
 
-`problem` Defines the type of problem. Equal to C specifies logistic regression, anything else specifies linear regression. The default value is `None`.
+`problem` Defines the type of problem. Equal to C specifies a classification problem, anything else specifies a continuous problem. The default value is `None`.
 
 `use_grad` Specifies if the gradient is calculated and returned. The default value is `True`.
 
@@ -32,7 +32,7 @@
 
 `data_file` File name with the dataset (csv format).
 
-`n_features` Number of features in the dataset (needed only for linear regression).
+`n_features` Number of features in the dataset (needed only for continuous problems).
 
 `hidden_layers` List, tuple, or array with the number of nodes in each hidden layers.
 
@@ -52,7 +52,7 @@
 
 There are four examples in *test.py*: wine, stock, wifi, pulsar. Since GDO is used, `use_grad` is set to `True`. For all examples `init_weights` is also set to `True`.
 
-### Single-label linear regression examples: wine
+### Single-label continuous problem example: wine
 
 ```python
 data_file = 'wine_dataset.csv'
@@ -69,13 +69,15 @@ tolF = 1.e-7
 
 Original dataset: <https://archive.ics.uci.edu/ml/datasets/Wine+Quality>.
 
-The dataset has 11 features, 1 label, 4898 samples, 261 variables, and a layout of [11, 20, 1].
+The dataset has 11 features, 1 label, and 4898 samples.
+
+The neural network has a layout of [11, 20, 1] and 261 variables.
 
 Correlation predicted/actual values: 0.708 (training), 0.601 (test).
 
 Exit on `epochs` with `tolX` = 2.0e-4 and `tolF` = 1.1e-7.
 
-### Multi-label linear regression examples: stock
+### Multi-label continuous problem example: stock
 
 ```python
 data_file = 'stock_dataset.csv'
@@ -92,13 +94,15 @@ tolF = 1.e-15
 
 Original dataset: <https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE>.
 
-The dataset has 6 features, 3 labels, 536 samples, 63 variables, and a layout of [6, 4, 4, 3].
+The dataset has 6 features, 3 labels, and 536 samples.
+
+The neural network has a layout of [6, 4, 4, 3] and 63 variables.
 
 Correlation predicted/actual values: 0.841 (training), 0.840 (test).
 
 Exit on `epochs` with `tolX` = 4.7e-6 and `tolF` = 9.8e-11.
 
-### Multi-class logistic regression examples: wifi
+### Multi-class classification problem example: wifi
 
 ```python
 data_file = 'wifi_dataset.csv'
@@ -115,13 +119,15 @@ tolF = 1.e-10
 
 Original dataset: <https://archive.ics.uci.edu/ml/datasets/Wireless+Indoor+Localization>.
 
-The dataset has 7 features, 4 classes, 2000 samples, 179 variables, and a layout of [7, 10, 5, 4, 4].
+The dataset has 7 features, 4 classes, and 2000 samples.
+
+The neural network has a layout of [7, 10, 5, 4, 4] and 179 variables.
 
 Accuracies predicted/actual values: 100.0% (training), 98.0% (test).
 
 Exit on `epochs` with `tolX` = 3.9e-5 and `tolF` = 1.0e-8.
 
-### Multi-class logistic regression examples: pulsar
+### Multi-class classification problem example: pulsar
 
 ```python
 data_file = 'pulsar_dataset.csv'
@@ -138,7 +144,9 @@ tolF = 1.e-7
 
 Original dataset: <https://archive.ics.uci.edu/ml/datasets/HTRU2>.
 
-The dataset has 8 features, 2 classes, 17898 samples, 222 variables, and a layout of [8, 10, 10, 2].
+The dataset has 8 features, 2 classes, and 17898 samples.
+
+The neural network has a layout of [8, 10, 10, 2] and 222 variables.
 
 Accuracies predicted/actual values: 98.1% (training), 98.0% (test).
 
