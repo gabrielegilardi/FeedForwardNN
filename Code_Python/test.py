@@ -37,8 +37,9 @@ Parameters
 example = house, stock, seed, wine
     Name of the example to run.
 problem
-    Defines the type of problem. Equal to C specifies logistic regression,
-    anything else specifies linear regression. The default value is <None>.
+    Defines the type of problem. Equal to C specifies specifies a
+    classification problem, anything else specifies a continuous problem.
+    The default value is <None>.
 use_grad = True, False
     Specifies if the gradient is calculated and returned. The default value
     is <True>.
@@ -48,7 +49,7 @@ init_weights = True, False
 data_file
     File name with the dataset (csv format).
 n_features
-    Number of features in the dataset (needed only for linear regression).
+    Number of features in the dataset (needed only for continuous problems).
 hidden_layers
     List, tuple, or array with the number of nodes in each hidden layers.
 0 < split_factor < 1
@@ -83,10 +84,10 @@ use_grad = True                 # By default calculate and return the gradient
 init_weights = True             # By default randomly initialize weights
 np.random.seed(1294404794)
 
-#  Single-label linear regression example
+#  Single-label continuous problem example
 if (example == 'wine'):
-    # 11 features, 1 label, 4898 samples, 261 variables
-    # Neural network layout: [11, 20, 1]
+    # Dataset: 11 features, 1 label, 4898 samples
+    # Neural network: layout of [11, 20, 1], 261 variables
     # Correlation predicted/actual values: 0.708 (training), 0.601 (test)
     # Exit on epochs with tolX = 2.0e-4 and tolF = 1.1e-7
     # https://archive.ics.uci.edu/ml/datasets/Wine+Quality
@@ -101,10 +102,10 @@ if (example == 'wine'):
     tolX = 1.e-7
     tolF = 1.e-7
 
-#  Multi-label linear regression example
+#  Multi-label continuous problem example
 elif (example == 'stock'):
-    # 6 features, 3 label, 536 samples, 63 variables
-    # Neural network layout: [6, 4, 4, 3]
+    # Dataset: 6 features, 3 label, 536 samples
+    # Neural network: layout of [6, 4, 4, 3], 63 variables
     # Correlation predicted/actual values: 0.841 (training), 0.840 (test)
     # Exit on epochs with tolX = 4.7e-6 and tolF = 9.8e-11
     # https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE
@@ -119,10 +120,10 @@ elif (example == 'stock'):
     tolX = 1.e-7
     tolF = 1.e-15
 
-# Multi-class logistic regression example
+# Multi-class classification problem example
 elif (example == 'wifi'):
-    # 7 features, 4 classes, 2000 samples, 179 variables
-    # Neural network layout: [7, 10, 5, 4, 4]
+    # Dataset: 7 features, 4 classes, 2000 samples
+    # Neural network: layout of [7, 10, 5, 4, 4], 179 variables
     # Accuracies predicted/actual values: 100.0% (training), 98.0% (test).
     # Exit on epochs with tolX = 3.9e-5 and tolF = 1.0e-8
     # https://archive.ics.uci.edu/ml/datasets/Wireless+Indoor+Localization
@@ -137,10 +138,10 @@ elif (example == 'wifi'):
     tolX = 1.e-7
     tolF = 1.e-10
 
-# Multi-class logistic regression example
+# Multi-class classification problem example
 elif (example == 'pulsar'):
-    # 8 features, 2 classes, 17898 samples, 222 variables
-    # Neural network layout: [8, 10, 10, 2]
+    # Dataset: 8 features, 2 classes, 17898 samples
+    # Neural network: layout of [8, 10, 10, 2], 222 variables
     # Accuracies predicted/actual values: 98.1% (training), 98.0% (test).
     # Exit on epochs with tolX = 2.5e-4 and tolF = 5.5e-7
     # https://archive.ics.uci.edu/ml/datasets/HTRU2
