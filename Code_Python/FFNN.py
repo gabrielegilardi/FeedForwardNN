@@ -3,6 +3,7 @@ Feed-Forward Neural Network (FFNN) Class
 
 Copyright (c) 2020 Gabriele Gilardi
 
+
 Arrays:
     X           (n_samples, n_inputs)           Input dataset (training)
     Xp          (n_samples, n_inputs)           Input dataset (prediction)
@@ -15,11 +16,11 @@ Arrays:
 
     n_samples           Number of samples.
     n_inputs            Number of nodes in the input layer (also number of
-                        features in the input dataset).
+                        features in the original input dataset).
     n_outputs           Number of nodes in the output layer (also number of
                         labels/classes in the output dataset).
-    n_labels            Number of outputs in the original data file.
-    n_var               Total number of variables.
+    n_labels            Number of outputs in the original dataset.
+    n_var               Number of variables.
     hidden_layers       Number of nodes in the hidden layers.
     n_layers            Number of layers.
 
@@ -43,7 +44,7 @@ Layer components:
     Notes:
     - the weights associated with the bias are in W[:, 0], while the weights
       associated with the inputs are in W[:, 1:].
-    - the number of variable in each layer is nodes*(inputs+1).
+    - the number of variables in each layer is nodes*(inputs+1).
 """
 
 import numpy as np
