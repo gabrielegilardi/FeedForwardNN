@@ -1,5 +1,5 @@
 """
-# Feed-Forward Neural Net (FFNN) for Regression Problems
+Feed-Forward Neural Net (FFNN) for Regression Problems
 
 Copyright (c) 2020 Gabriele Gilardi
 
