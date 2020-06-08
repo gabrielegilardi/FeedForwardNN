@@ -52,9 +52,15 @@ import numpy as np
 
 def f_activation(z):
     """
-    Activation function (sigmoid)
+    Numerically stable version of the sigmoid function (reference:
+    http://fa.bianp.net/blog/2019/evaluate_logistic/#sec3.)
     """
-    a = 1.0 / (1.0 + np.exp(-z))
+    a = np.zeros_like(z)
+    idx = ( z >= 0.0)
+    a[idx] = 1.0 / (1.0 + np.exp(-z[idx]))
+    idx = np.invert(idx)
+    a[idx] = np.exp(z[idx]) / (1.0 + np.exp(z[idx]))
+
     return a
 
 
@@ -63,6 +69,24 @@ def f1_activation(z):
     Derivative of activation function (sigmoid)
     """
     a = f_activation(z) * (1.0 - f_activation(z))
+    return a
+
+
+def logsig(z):
+    """
+    Numerically stable version of the log-sigmoid function (reference:
+    http://fa.bianp.net/blog/2019/evaluate_logistic/#sec3.)
+    """
+    a = np.zeros_like(z)
+    idx = (z < -33.0)
+    a[idx] = z[idx]
+    idx = (z >= -33.0) & (z < -18.0)
+    a[idx] = z[idx] - np.exp(z[idx])
+    idx = (z >= -18.0) & (z < 37.0)
+    a[idx] = - np.log1p(np.exp(-z[idx]))
+    idx = (z >= 37.0)
+    a[idx] = - np.exp(-z[idx])
+
     return a
 
 
@@ -244,17 +268,9 @@ class FFNN:
         """
         n_samples = self.Yout.shape[0]
 
-        # To avoid -inf in log
-        tiny_number = 1.0e-10
-        self.NN[-1].A = \
-            np.fmin(np.fmax(self.NN[-1].A, tiny_number), (1.0 - tiny_number))
-
-        # Error
-        error = self.Yout * np.log(self.NN[-1].A) \
-                + (1.0 - self.Yout) * np.log(1.0 - self.NN[-1].A)
-
-        # Cost function
-        J = - error.sum() / n_samples
+        # Cost function  (activation value is calculated in the logsig function)
+        error = (1.0 - self.Yout) * self.NN[-1].Z - logsig(self.NN[-1].Z)
+        J = error.sum() / n_samples
         for i in range(1, self.n_layers):
             J += self.L2 * (self.NN[i].W[:, 1:] ** 2.0).sum() / (2.0 * n_samples)
 
