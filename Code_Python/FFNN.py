@@ -1,5 +1,5 @@
 """
-Feed-Forward Neural Network (FFNN) Class
+Feed-Forward Neural Network (FFNN) class.
 
 Copyright (c) 2020 Gabriele Gilardi
 
