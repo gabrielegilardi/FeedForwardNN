@@ -13,6 +13,7 @@
 - Arbitrary number of nodes for input, hidden, and output layers.
 - Continuous problem: quadratic cost function, L2-type regularization term, sigmoid activation for hidden layers, linear activation for output layer.
 - Classification problem: cross-entropy cost function, L2-type regularization term, sigmoid activation for hidden and output layers, classes determined automatically.
+- Sigmoid and cross-entropy function are computed using a numerically stable implementation.
 - Gradient of the cost function calculated using the backpropagation algorithm.
 - Option to reduce the learning rate during the computation.
 - Option to not to compute and return the gradient.
@@ -73,7 +74,7 @@ The dataset has 11 features, 1 label, and 4898 samples.
 
 The neural network has a layout of [11, 20, 1] and 261 variables.
 
-Correlation predicted/actual values: 0.708 (training), 0.601 (test).
+Predicted/actual correlation values: 0.708 (training), 0.601 (test).
 
 Exit on `epochs` with `tolX` = 2.0e-4 and `tolF` = 1.1e-7.
 
@@ -98,7 +99,7 @@ The dataset has 6 features, 3 labels, and 536 samples.
 
 The neural network has a layout of [6, 4, 4, 3] and 63 variables.
 
-Correlation predicted/actual values: 0.841 (training), 0.840 (test).
+Predicted/actual correlation values: 0.841 (training), 0.840 (test).
 
 Exit on `epochs` with `tolX` = 4.7e-6 and `tolF` = 9.8e-11.
 
@@ -123,7 +124,7 @@ The dataset has 7 features, 4 classes, and 2000 samples.
 
 The neural network has a layout of [7, 10, 5, 4, 4] and 179 variables.
 
-Accuracies predicted/actual values: 100.0% (training), 98.0% (test).
+Predicted/actual accuracy values: 100.0% (training), 98.0% (test).
 
 Exit on `epochs` with `tolX` = 3.9e-5 and `tolF` = 1.0e-8.
 
@@ -148,6 +149,6 @@ The dataset has 8 features, 2 classes, and 17898 samples.
 
 The neural network has a layout of [8, 10, 10, 2] and 222 variables.
 
-Accuracies predicted/actual values: 98.1% (training), 98.0% (test).
+Predicted/actual accuracy values: 98.1% (training), 98.0% (test).
 
 Exit on `epochs` with `tolX` = 2.5e-4 and `tolF` = 5.5e-7.

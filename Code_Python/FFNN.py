@@ -4,47 +4,46 @@ Feed-Forward Neural Network (FFNN) Class
 Copyright (c) 2020 Gabriele Gilardi
 
 
-Arrays:
-    X           (n_samples, n_inputs)           Input dataset (training)
-    Xp          (n_samples, n_inputs)           Input dataset (prediction)
-    Y           (n_samples, n_outputs)          Output dataset (training)
-    Yp          (n_samples, n_labels)           Output dataset (prediction)
-    L2          scalar                          Regularization factor
-    J           scalar                          Cost function
-    grad        (n_var, )                       Unrolled gradient
-    theta       (n_var, )                       Unrolled weights
+X           (n_samples, n_inputs)           Input dataset (training)
+Xp          (n_samples, n_inputs)           Input dataset (prediction)
+Y           (n_samples, n_outputs)          Output dataset (training)
+Yp          (n_samples, n_labels)           Output dataset (prediction)
+L2          scalar                          Regularization factor
+J           scalar                          Cost function
+grad        (n_var, )                       Unrolled gradient
+theta       (n_var, )                       Unrolled weights
 
-    n_samples           Number of samples.
-    n_inputs            Number of nodes in the input layer (also number of
-                        features in the original input dataset).
-    n_outputs           Number of nodes in the output layer (also number of
-                        labels/classes in the output dataset).
-    n_labels            Number of outputs in the original dataset.
-    n_var               Number of variables.
-    hidden_layers       Number of nodes in the hidden layers.
-    n_layers            Number of layers.
+n_samples           Number of samples
+n_inputs            Number of nodes in the input layer (also number of
+                    features in the original input dataset)
+n_outputs           Number of nodes in the output layer (also number of
+                    labels/classes in the output dataset)
+n_labels            Number of outputs in the original dataset
+n_var               Number of variables
+hidden_layers       Number of nodes in the hidden layers
+n_layers            Number of layers
 
 Layout structure:
-    equal to            [n_inputs, hidden_layers, n_outputs].
-    size of             (n_layers, ).
-    layout[i]           Number of nodes of the (i)th layer.
-    layout[i-1]         Number of inputs of the (i)th layer.
-    layout[i-1]+1       Number of inputs of the (i)th layer plus bias term.
+equal to            [n_inputs, hidden_layers, n_outputs]
+size of             (n_layers, )
+layout[i]           Number of nodes of the (i)th layer
+layout[i-1]         Number of inputs of the (i)th layer
+layout[i-1]+1       Number of inputs of the (i)th layer plus bias term
 
 Layer components:
-    Z           (n_samples, nodes)          Weighted inputs
-    A           (n_samples, nodes)          Activations
-    D           (n_samples, nodes)          Delta errors
-    W           (nodes, 1+inputs)           Weights (includes the bias terms)
-    grad        (nodes, 1+inputs)           Gradient of the cost function
+Z           (n_samples, nodes)          Weighted inputs
+A           (n_samples, nodes)          Activations
+D           (n_samples, nodes)          Delta errors
+W           (nodes, 1+inputs)           Weights (includes the bias terms)
+grad        (nodes, 1+inputs)           Gradient of the cost function
 
-    nodes       Layer number of nodes.
-    inputs      Layer number of inputs (also number of nodes previous layer).
+nodes       Layer number of nodes.
+inputs      Layer number of inputs (also number of nodes previous layer)
 
-    Notes:
-    - the weights associated with the bias are in W[:, 0], while the weights
-      associated with the inputs are in W[:, 1:].
-    - the number of variables in each layer is nodes*(inputs+1).
+Notes:
+- the weights associated with the bias are in W[:, 0], while the weights
+  associated with the inputs are in W[:, 1:].
+- the number of variables in each layer is <nodes * (inputs + 1)>.
 """
 
 import numpy as np
@@ -56,8 +55,10 @@ def f_activation(z):
     http://fa.bianp.net/blog/2019/evaluate_logistic/#sec3.)
     """
     a = np.zeros_like(z)
-    idx = ( z >= 0.0)
+
+    idx = (z >= 0.0)
     a[idx] = 1.0 / (1.0 + np.exp(-z[idx]))
+
     idx = np.invert(idx)
     a[idx] = np.exp(z[idx]) / (1.0 + np.exp(z[idx]))
 
@@ -66,7 +67,7 @@ def f_activation(z):
 
 def f1_activation(z):
     """
-    Derivative of activation function (sigmoid)
+    Derivative of activation function (sigmoid).
     """
     a = f_activation(z) * (1.0 - f_activation(z))
     return a
@@ -78,12 +79,16 @@ def logsig(z):
     http://fa.bianp.net/blog/2019/evaluate_logistic/#sec3.)
     """
     a = np.zeros_like(z)
-    idx = (z < -33.0)
+
+    idx = (z < -33.3)
     a[idx] = z[idx]
-    idx = (z >= -33.0) & (z < -18.0)
+
+    idx = (z >= -33.3) & (z < -18.0)
     a[idx] = z[idx] - np.exp(z[idx])
+
     idx = (z >= -18.0) & (z < 37.0)
     a[idx] = - np.log1p(np.exp(-z[idx]))
+
     idx = (z >= 37.0)
     a[idx] = - np.exp(-z[idx])
 
@@ -225,8 +230,8 @@ class FFNN:
 
     def build_weights(self, theta):
         """
-        Builds the weights from the array of variables.
-        Each layer weight matrix has size (nodes, 1 +inputs)
+        Builds the weights from the array of variables. Each layer weight
+        matrix has size (nodes, 1 +inputs).
         """
         idx1 = 0
         for i in range(1, self.n_layers):
@@ -238,7 +243,7 @@ class FFNN:
 
     def set_init_weights(self):
         """
-        If requested randomly sets the initial weights
+        If requested randomly sets the initial weights.
         """
         for i in range(1, self.n_layers):
             n_rows = self.NN[i].nodes
@@ -253,7 +258,7 @@ class FFNN:
 
     def feed_forward(self, X):
         """
-        Carries out the feed forward step
+        Carries out the feed forward step.
         """
         B = np.ones((X.shape[0], 1))        # Bias contribution
         self.NN[0].A = X.copy()             # Input layer

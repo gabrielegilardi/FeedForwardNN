@@ -159,9 +159,9 @@ def regression_sol(X, Y):
 
 def calc_rmse(a, b):
     """
-    Returns the root-mean-square-error of arrays <a> and <b>.
-    If the arrays are multi-column, the RMSE is calculated as all the
-    columns are one single vector.
+    Returns the root-mean-square-error of arrays <a> and <b>. If the arrays
+    are multi-column, the RMSE is calculated as all the columns are one
+    single vector.
     """
     a = a.flatten()
     b = b.flatten()
@@ -172,9 +172,9 @@ def calc_rmse(a, b):
 
 def calc_corr(a, b):
     """
-    Returns the correlation between arrays <a> and <b>.
-    If the arrays are multi-column, the correlation is calculated as
-    all the columns are one single vector.
+    Returns the correlation between arrays <a> and <b>. If the arrays are
+    multi-column, the correlation is calculated as all the columns are one
+    single vector.
     """
     a = a.flatten()
     b = b.flatten()
@@ -185,8 +185,8 @@ def calc_corr(a, b):
 
 def calc_accu(a, b):
     """
-    Returns the accuracy (in %) between arrays <a> and <b>.
-    The two arrays must be column/row vectors.
+    Returns the accuracy (in %) between arrays <a> and <b>.The two arrays must
+    be column/row vectors.
     """
     a = a.flatten()
     b = b.flatten()
