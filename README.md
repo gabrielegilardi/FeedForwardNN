@@ -1,4 +1,4 @@
-# Multivariate Regression and Classification Using Feed-Forward Neural Networks and Gradient Descent Optimization
+# Multivariate Regression and Classification Using a Feed-Forward Neural Network and Gradient Descent Optimization
 
 ## Reference
 
