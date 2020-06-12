@@ -1,6 +1,5 @@
 # Multivariate Regression and Classification Using Feed-Forward Neural Networks and Gradient Descent Optimization
 
-
 ## Reference
 
 - Mathematical background: ["Neural Networks and Deep Learning"](http://neuralnetworksanddeeplearning.com/index.html).
