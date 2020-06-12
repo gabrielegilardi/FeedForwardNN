@@ -1,5 +1,6 @@
 """
-Feed-Forward Neural Network (FFNN) class.
+Multivariate Regression and Classification Using Feed-Forward Neural Networks
+and Gradient Descent Optimization.
 
 Copyright (c) 2020 Gabriele Gilardi
 

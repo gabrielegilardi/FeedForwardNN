@@ -1,5 +1,6 @@
 """
-Feed-Forward Neural Net (FFNN) for regression problems.
+Multivariate Regression and Classification Using Feed-Forward Neural Networks
+and Gradient Descent Optimization.
 
 Copyright (c) 2020 Gabriele Gilardi
 
@@ -16,7 +17,7 @@ Characteristics
 ---------------
 - The code has been written and tested in Python 3.7.7.
 - Multi-input/multi-output (multivariate) feed-forward neural network
-  implementation for regression problems.
+  implementation for regression and classification problems.
 - Arbitrary number of nodes for input, hidden, and output layers.
 - Continuous problem: quadratic cost function, L2-type regularization term,
   sigmoid activation for hidden layers, linear activation for output layer.
